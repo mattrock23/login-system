@@ -1,0 +1,31 @@
+@charset "utf-8";
+
+#registerbox {
+  border-right: 1px solid #000;
+  float: left;
+  padding: .9em;
+  width: 45%;
+  margin-bottom: 10px;
+}
+
+#loginbox {
+  padding: .9em;
+  float: left;
+  width: 45%;
+}
+
+.label {
+  width: 45%;
+  float: left;
+  position: relative;
+}
+
+.element {
+  float: left;
+  position: relative;
+}
+
+h4 {
+  margin-top: 0;
+}
+
