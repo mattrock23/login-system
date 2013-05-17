@@ -18,7 +18,6 @@ if(isset($_POST['subemail']) || isset($_POST['subpass']) || isset($_POST['rememb
 
 $token = $_GET['token'];
 if($token) {
-	//check db for the token hashed
 	$link = mysql_connect(DBSERV, DBUSER, DBPASS);
     mysql_select_db(DBNAME, $link);
     $q = "SELECT * FROM passwordreset WHERE token = '$token'";
@@ -30,12 +29,7 @@ if($token) {
 	if ($dbarray['timestamp'] < time()) {
 	  $alert .= "Your password reset request has expired, please try again.<br />";
 	}
-	//if not in db, error this email did not request reset contact webmaster if you actually did try to reset
-	//if hashed token is in the db, echo the associated email address and a hidden field with the email address
-
-} else { // no token means user just wants to change password
-	//echo a field for the email
-	//echo a current password field
+} else {
   $alert = "There seems to be an error. You must have come to this page the wrong way. Please try again.";
 }
 

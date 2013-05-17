@@ -163,7 +163,7 @@ function logout() {
   session_destroy();
 }
 
-function register($regemail, $regpass, $regpass2) {// TODO don't store emails as plain text
+function register($regemail, $regpass, $regpass2) {
   $err = array();
   if(!$regemail || strlen($regemail = trim($regemail)) == 0){
     array_push($err, "Please enter your email.");
@@ -216,7 +216,7 @@ function register($regemail, $regpass, $regpass2) {// TODO don't store emails as
   return $err;
 }
 
-function resetPass($email) {// update this to reset a password rather than retrieve it
+function resetPass($email) {
   $err = array();
   if(!$email || strlen($email = trim($email)) == 0){
     array_push($err, "Please enter an email address.");
@@ -238,15 +238,12 @@ function resetPass($email) {// update this to reset a password rather than retri
   if(count($err) != 0) {
     return $err;
   }
-  //generate a token
   $token = md5(uniqid(rand(), true));
-  //store hashed token in db with email and expiration timestamp 20 minutes from now
   $timestamp = time() + (20 * 60);
   $link = mysql_connect(DBSERV, DBUSER, DBPASS);
   mysql_select_db(DBNAME, $link);
   $q = "INSERT INTO passwordreset VALUES ('$email', '$token', '$timestamp')";
   mysql_query($q, $link);
-  //send link with ?token= to the user
   $message = 'You are receiving this email because you requested to reset your password. Click here to reset your password. <a href="editpassword.php?token=' . $token . '">editpassword.php?token=' . $token . '</a>';
   $message = wordwrap($message, 70);
   $header = "To: '$email' From: webmaster@pronunciebienelingles.com";

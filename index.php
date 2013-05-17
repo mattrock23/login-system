@@ -60,15 +60,15 @@ if($_SESSION['loggedin']) { ?>
 Free Content<br />
 <?
 $privileges = getUserPrivileges($_SESSION['email']);
-if ($privileges) {//if full paid subscriber
+if ($privileges) {
 ?>
 Paid content<br />
 <?
-} else { //if not a full subscriber
+} else {
 ?>
 Pay and get more content<br />
 <?php
-}} else {//If not logged in
+}} else {
 ?>
 <p>Please login to view the content.</p>
 <div id="registerbox">
